@@ -2,12 +2,21 @@ touch .edit; MISSING=$(find . -type f -name \*.go|grep -v -f .edit); [ -z "${MIS
 
 execute(){
 	rm -f golib
-	go build
-	[ -f ./golib ] || echo [ERROR] Compile ERROR.
-	[ -f ./golib ] && ./golib
+	go test -v
+}
+pushtag(){
+	git add .;
+	git commit -m "Changes "$(date +%Y/%m/%d-%H:%M:%S)
+	git push
+	[ "$(git tag|tail -1)" == "$(cat VERSION)" ] || {
+		git tag $(cat VERSION)
+		git push origin $(cat VERSION)
+	}
 }
 
 case "$1" in
+ pt)	pushtag;
+	;;
  e) 	vi -p $(grep -v '^#' .edit) .edit
 	execute;
 	;;
