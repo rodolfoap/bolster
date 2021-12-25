@@ -41,12 +41,13 @@ func main() {
 }
 ```
 
-## Useful tools:
+## Useful commands:
 ```
 # GOROOT=/usr/local/go
 go clean -modcache
 sudo find /usr/local/go -name cache -print -exec rm -r {} \;
 sudo find /usr/local/go -name golib -print -exec rm -r {} \;
 sudo find /usr/local/go -name rodolfoap -print -exec rm -r {} \;
-go get -u github.com/rodolfoap/golib@v0.6.0
+sed -i '/require github.com.rodolfoap.golib/d' go.mod
+go get -u github.com/rodolfoap/golib@v0.7.0
 ```
