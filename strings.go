@@ -1,4 +1,4 @@
-package github.com/rodolfoap/golib
+package golib
 import("bytes")
 
 func Join(values... string) string{
