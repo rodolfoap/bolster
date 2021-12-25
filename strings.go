@@ -1,5 +1,5 @@
 package main
-import("bytes";)
+import("bytes")
 
 func Join(values... string) string{
 	var b bytes.Buffer
