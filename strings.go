@@ -12,9 +12,7 @@ func Printhr(){
 }
 
 func HR()string{
-        if term.IsTerminal(0) {
-                width, _, _:=term.GetSize(0)
-                return strings.Repeat("=", width)
-        }
-        return ""
+        if !term.IsTerminal(0) { return ""; }
+	width, _, _:=term.GetSize(0)
+	return strings.Repeat("=", width)
 }
