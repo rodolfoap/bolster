@@ -2,3 +2,4 @@ golib_test.go
 strings.go
 go.mod
 ./debug.go
+./test/app.go

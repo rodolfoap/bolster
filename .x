@@ -12,6 +12,7 @@ pushtag(){
 		git tag $(cat VERSION)
 		git push origin $(cat VERSION)
 	}
+	(cd test; go get github.com/rodolfoap/golib@$(cat VERSION))
 }
 
 case "$1" in
