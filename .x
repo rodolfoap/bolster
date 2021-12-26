@@ -2,6 +2,7 @@ touch .edit; MISSING=$(find . -type f -name \*.go|grep -v -f .edit); [ -z "${MIS
 
 execute(){
 	rm -f golib
+	go mod tidy
 	go test -v
 }
 pushtag(){
@@ -12,7 +13,6 @@ pushtag(){
 		git tag $(cat VERSION)
 		git push origin $(cat VERSION)
 	}
-	(cd test; go get github.com/rodolfoap/golib@$(cat ../VERSION))
 }
 
 case "$1" in

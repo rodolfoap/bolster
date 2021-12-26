@@ -1,5 +1,5 @@
 package golib
-import("log"; "fmt"; "runtime"; "os/exec")
+import("log"; "fmt"; "runtime";)
 
 func Tracef(format string, msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
@@ -17,10 +17,4 @@ func Fatal(err interface{}){
 	if err!=nil{
 		log.Fatalf("%s %s()[%d] FATAL: %v", frame.File, frame.Function, frame.Line, err)
 	}
-}
-func RunCommand(name string, command... string)string{
-	cmd:=exec.Command(name, command...)
-	std, err:=cmd.CombinedOutput()
-	Fatal(err)
-	return string(std)
 }
