@@ -5,18 +5,24 @@ execute(){
 	go mod tidy
 	go test -v
 }
-pushtag(){
+tagversion(){
+	# Always increase VERSION
+	NEWVERS=$(cat VERSION|awk -F. '{print $1"."$2"."$3+1}')
+	echo $NEWVERS>VERSION
+
+	# Always commit
 	git add .;
 	git commit -m "Changes "$(date +%Y/%m/%d-%H:%M:%S)
 	git push
-	[ "$(git tag|tail -1)" == "$(cat VERSION)" ] || {
-		git tag $(cat VERSION)
-		git push origin $(cat VERSION)
-	}
+
+	# Tag
+	git tag $(cat VERSION)
+	git push origin $(cat VERSION)
 }
 
+
 case "$1" in
- pt)	pushtag;
+ t)	tagversion;
 	;;
  e) 	vi -p $(grep -v '^#' .edit) .edit
 	execute;
