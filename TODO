@@ -1,2 +1,0 @@
-a) output:=RunCommand("ps fax")
-b) text:=File2Txt("filename.txt")
