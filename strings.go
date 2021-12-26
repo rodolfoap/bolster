@@ -1,5 +1,5 @@
 package golib
-import("fmt"; "strings"; "bytes"; "golang.org/x/term"; "io/ioutil")
+import("fmt"; "strings"; "bytes"; "golang.org/x/term";)
 
 func Join(values... string) string{
 	var b bytes.Buffer
@@ -17,10 +17,4 @@ func HR()string{
                 return strings.Repeat("=", width)
         }
         return ""
-}
-
-func FileToString(filename string)string{
-	bytes, err := ioutil.ReadFile(filename)
-	Fatal(err)
-	return string(bytes)
 }
