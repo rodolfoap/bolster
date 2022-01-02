@@ -1,6 +1,11 @@
 package golib
 import("log"; "fmt"; "runtime";)
 
+func Printf(format string, msgs ...interface{}) {
+	pc:=make([]uintptr, 1)
+	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
+	fmt.Printf("%s %s()[%d]: %s\n", frame.File, frame.Function, frame.Line, fmt.Sprintf(format, msgs...))
+}
 func Tracef(format string, msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
