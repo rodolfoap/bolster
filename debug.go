@@ -4,8 +4,7 @@ import("log"; "fmt"; "runtime";)
 func Println(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
-	msglist:=fmt.Sprintln(msgs...)
-	fmt.Println(frame.File, frame.Function, "["+string(frame.Line)+"]:", msglist)
+	fmt.Println(frame.File, frame.Function, "["+string(frame.Line)+"]:", fmt.Sprintln(msgs...))
 }
 func Printf(format string, msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
