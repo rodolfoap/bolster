@@ -24,7 +24,5 @@ func Trace() {
 func Fatal(err interface{}){
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
-	if err!=nil{
-		log.Fatalf("%s %s()[%d] FATAL: %v", frame.File, frame.Function, frame.Line, err)
-	}
+	if err!=nil{ log.Fatalf("%s %s()[%d] FATAL: %v", frame.File, frame.Function, frame.Line, err) }
 }
