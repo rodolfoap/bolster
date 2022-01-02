@@ -5,6 +5,7 @@ func Test_strings(t *testing.T){
 	fmt.Println(Join("Hello", ",", " ", "World", "!"))
 	Printhr()
 	Trace()
+	Println()
 	Tracef("%v: %d", "Some message", 10)
 	_, e:=os.Open("go.mod")
 	Fatal(e)
