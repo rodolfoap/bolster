@@ -1,4 +1,4 @@
-module github.com/rodolfoap/golib
+module github.com/rodolfoap/bolster
 
 go 1.15
 

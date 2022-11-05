@@ -2,4 +2,4 @@ strings.go
 io.go
 exec.go
 debug.go
-golib_test.go
+./bolster_test.go

@@ -1,8 +1,9 @@
-package golib
-import("io/ioutil")
+package bolster
+import("io/ioutil";)
 
-func FileToString(filename string)string{
-	bytes, err := ioutil.ReadFile(filename)
+// Load file to string
+func ReadFile(filename string) string {
+	bytes, err:=ioutil.ReadFile(filename)
 	Fatal(err)
 	return string(bytes)
 }

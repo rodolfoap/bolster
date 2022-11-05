@@ -25,6 +25,7 @@ case "$1" in
  t)	tagversion;
 	;;
  e) 	vi -p $(grep -v '^#' .edit) .edit
+	ls *.go|xargs -n1 goformat
 	execute;
 	;;
 "")	execute
