@@ -7,9 +7,10 @@ execute(){
 }
 tagversion(){
 	# Always increase VERSION
-	echo Last version is: $(cat VERSION)
-	read -p "New version: " NEWVERS
-	read -p "Tag message: " TAGMESSAGE
+	# echo Last version is: $(cat VERSION)
+	# read -p "New version: " NEWVERS
+	# read -p "Tag message: " TAGMESSAGE
+	NEWVERS=$(cat VERSION|awk -F. '{print $1"."$2"."$3+1}')
 	echo ${NEWVERS}>VERSION
 
 	# Always commit
