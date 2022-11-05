@@ -45,5 +45,9 @@ func main() {
 ```
 # echo $GOROOT
 go clean -modcache
+sudo find /usr/local/go -name cache -print -exec rm -r {} \;
+sudo find /usr/local/go -name bolster -print -exec rm -r {} \;
+sudo find /usr/local/go -name rodolfoap -print -exec rm -r {} \;
+sed -i '/require github.com.rodolfoap.bolster/d' go.mod
 go get -u github.com/rodolfoap/bolster@v0.7.0
 ```
