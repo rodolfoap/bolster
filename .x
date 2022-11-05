@@ -9,19 +9,18 @@ tagversion(){
 	# Always increase VERSION
 	echo Last version is: $(cat VERSION)
 	read -p "New version: " NEWVERS
-	# NEWVERS=$(cat VERSION|awk -F. '{print $1"."$2"."$3+1}')
-	echo $NEWVERS>VERSION
+	read -p "Tag message: " TAGMESSAGE
+	echo ${NEWVERS}>VERSION
 
 	# Always commit
 	git add .;
-	git commit -m "Changes "$(date +%Y/%m/%d-%H:%M:%S)
+	git commit -m $(date +%Y/%m/%d-%H:%M:%S)": ${TAGMESSAGE}"
 	git push
 
 	# Tag
 	git tag $(cat VERSION)
 	git push origin $(cat VERSION)
 }
-
 
 case "$1" in
  t)	tagversion;
