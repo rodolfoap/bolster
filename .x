@@ -11,8 +11,8 @@ tagversion(){
 	# read -p "New version: " NEWVERS
 	read -p "Tag message: " TAGMESSAGE
 	NEWVERS=$(cat VERSION|awk -F. '{print $1"."$2"."$3+1}')
-	echo New version is: $(cat VERSION)
 	echo ${NEWVERS}>VERSION
+	echo New version is: $(cat VERSION)
 
 	# Always commit
 	git add .;
