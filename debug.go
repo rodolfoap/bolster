@@ -1,12 +1,28 @@
 package bolster
-import("fmt"; "log"; "runtime";)
+import("fmt"; "log"; "os"; "runtime"; "strconv"; b "github.com/rodolfoap/bolster";)
+
+// BDEBUG=={ 1 | 0 }
+func isDebugMode() bool {
+	ttable:=[]bool{false, true}
+	index, err:=strconv.Atoi(os.Getenv("BDEBUG"))
+	b.Fatal(err)
+	if len(index)==0 {
+		fmt.Printf("LEN 0: DEBUG IS FALSE")
+		return false
+	} else {
+		fmt.Printf("LEN NOT0: DEBUG IS", ttable[index])
+		return ttable[index]
+	}
+}
 
 // Produces a trace containing filename, function, line and a message
 // "/home/rap/git/bolster/bolster.go main.main() [9] 9 1 3" Adds spaces when neither is a string
 func Trace(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
-	fmt.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
+	if isDebugMode() {
+		fmt.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
+	}
 }
 
 // Produces a trace containing date and time, filename, function, line and a message
@@ -14,7 +30,9 @@ func Trace(msgs ...interface{}) {
 func TimeTrace(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
-	log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
+	if isDebugMode() {
+		log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
+	}
 }
 
 // Raises an error message
