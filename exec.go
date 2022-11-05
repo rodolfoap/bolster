@@ -16,10 +16,12 @@ type RunosStruc struct {
 func RunosFactory(command string, args ...string) RunosStruc {
 	c:=RunosStruc{Status: 0}
 	c.cmd=exec.Command(command, args...)
-	out, _:=c.cmd.StdoutPipe()
-	err, _:=c.cmd.StderrPipe()
-	c.Stdout=bufio.NewScanner(out)
-	c.Stderr=bufio.NewScanner(err)
+	stdout, err:=c.cmd.StdoutPipe()
+	Error(err)
+	stderr, err:=c.cmd.StderrPipe()
+	Error(err)
+	c.Stdout=bufio.NewScanner(stdout)
+	c.Stderr=bufio.NewScanner(stderr)
 	c.Stdout.Split(bufio.ScanLines)
 	c.Stderr.Split(bufio.ScanLines)
 	return c
@@ -28,6 +30,7 @@ func RunosFactory(command string, args ...string) RunosStruc {
 // The actual launching command
 func (c *RunosStruc) RunosCommand() {
 	stat:=c.cmd.Run()
+	Error(stat)
 	if errors.As(stat, &c.exerr) {
 		c.Status=c.exerr.ExitCode()
 	}

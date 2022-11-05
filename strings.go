@@ -4,6 +4,7 @@ import("bytes"; "fmt"; "strings"; "golang.org/x/term";)
 // Prints an horizontal row the width of the terminal
 func Printhr() {
 	if !term.IsTerminal(0) {
+		fmt.Println(strings.Repeat("=", 80))
 		return
 	}
 	width, _, _:=term.GetSize(0)

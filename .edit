@@ -1,5 +1,5 @@
+bolster_test.go
 strings.go
 io.go
 exec.go
 debug.go
-./bolster_test.go
