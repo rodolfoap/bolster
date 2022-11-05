@@ -1,11 +1,11 @@
 package bolster
-import("fmt"; "log"; "os"; "runtime"; "strconv"; b "github.com/rodolfoap/bolster";)
+import("fmt"; "log"; "os"; "runtime"; "strconv";)
 
 // BDEBUG=={ 1 | 0 }
 func isDebugMode() bool {
 	ttable:=[]bool{false, true}
 	index, err:=strconv.Atoi(os.Getenv("BDEBUG"))
-	b.Fatal(err)
+	Fatal(err)
 	if len(index)==0 {
 		fmt.Printf("LEN 0: DEBUG IS FALSE")
 		return false
