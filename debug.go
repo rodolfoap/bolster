@@ -4,13 +4,12 @@ import("fmt"; "log"; "os"; "runtime"; "strconv";)
 // BDEBUG=={ 1 | 0 }
 func isDebugMode() bool {
 	ttable:=[]bool{false, true}
-	index, err:=strconv.Atoi(os.Getenv("BDEBUG"))
-	Fatal(err)
+	index:=os.Getenv("BDEBUG")
 	if len(index)==0 {
-		fmt.Printf("LEN 0: DEBUG IS FALSE")
 		return false
 	} else {
-		fmt.Printf("LEN NOT0: DEBUG IS", ttable[index])
+		index, err:=strconv.Atoi(os.Getenv("BDEBUG"))
+		Fatal(err)
 		return ttable[index]
 	}
 }
