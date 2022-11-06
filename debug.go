@@ -20,7 +20,7 @@ func Trace(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
 	if isDebugMode() {
-		fmt.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
+		log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
 	}
 }
 
@@ -30,17 +30,7 @@ func Tracef(format string, msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
 	if isDebugMode() {
-		fmt.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprintf(format, msgs...))
-	}
-}
-
-// Produces a trace containing date and time, filename, function, line and a message, IF BDEBUG==1
-// "2022/11/05 11:16:46 /home/rap/git/bolster/bolster.go main.main() [10] Using log"
-func TimeTrace(msgs ...interface{}) {
-	pc:=make([]uintptr, 1)
-	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
-	if isDebugMode() {
-		log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
+		log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprintf(format, msgs...))
 	}
 }
 
