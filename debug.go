@@ -14,7 +14,7 @@ func isDebugMode() bool {
 	}
 }
 
-// Produces a trace containing filename, function, line and a message
+// Produces a trace containing filename, function, line and a message, IF BDEBUG==1
 // "/home/rap/git/bolster/bolster.go main.main() [9] 9 1 3" Adds spaces when neither is a string
 func Trace(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
@@ -24,7 +24,7 @@ func Trace(msgs ...interface{}) {
 	}
 }
 
-// Produces a trace containing date and time, filename, function, line and a message
+// Produces a trace containing date and time, filename, function, line and a message, IF BDEBUG==1
 // "2022/11/05 11:16:46 /home/rap/git/bolster/bolster.go main.main() [10] Using log"
 func TimeTrace(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
@@ -32,6 +32,15 @@ func TimeTrace(msgs ...interface{}) {
 	if isDebugMode() {
 		log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
 	}
+}
+
+// Raises an error message, independently of BDEBUG
+// Produces a trace containing date and time, filename, function, line and a message
+// "2022/11/05 11:16:46 /home/rap/git/bolster/bolster.go main.main() [10] Using log"
+func Log(msgs ...interface{}) {
+	pc:=make([]uintptr, 1)
+	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
+	log.Printf("%s %s() [%d] %s\n", frame.File, frame.Function, frame.Line, fmt.Sprint(msgs...))
 }
 
 // Raises an error message
