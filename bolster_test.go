@@ -39,6 +39,14 @@ func Test_lib(t *testing.T) {
 	fmt.Println("EXITSTATUS:", c.Status)
 	fmt.Println("LOG_LENGTH:", len(executionLog))
 
+	/*** Misc *************************************************************************************************/
+
+	Printhr()
+
+	Log("Ternary operator: true: ", iff(1==2, false, true))
+	Log("Ternary operator: 22: ", iff(2==3, 1, 22))
+	Log("Ternary operator: d: ", iff("a"=="b", "c", "d"))
+
 	/*** Debug ************************************************************************************************/
 
 	Printhr()
@@ -65,4 +73,5 @@ func Test_lib(t *testing.T) {
 
 	// Will not run, the FATAL error has exited.
 	Printhr()
+
 }

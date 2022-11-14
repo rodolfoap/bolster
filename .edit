@@ -3,3 +3,4 @@ strings.go
 io.go
 exec.go
 debug.go
+misc.go
