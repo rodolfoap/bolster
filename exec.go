@@ -1,4 +1,4 @@
-package bolster
+package gx
 import("bufio"; "errors"; "os/exec";)
 
 // This struct contains the execution context

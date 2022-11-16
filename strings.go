@@ -1,4 +1,4 @@
-package bolster
+package gx
 import("bytes"; "fmt"; "strings"; "golang.org/x/term";)
 
 // Prints an horizontal row the width of the terminal

@@ -2,12 +2,12 @@
 
 ## Create the library:
 
-Project in `github.com/rodolfoap/bolster`:
+Project in `github.com/rodolfoap/gx`:
 
 #### `go.mod`:
 
 ```
-module github.com/rodolfoap/bolster
+module github.com/rodolfoap/gx
 
 go 1.15
 ```
@@ -15,7 +15,7 @@ go 1.15
 #### `strings.go`:
 
 ```
-package bolster
+package gx
 import("bytes")
 
 func Join(values... string) string{
@@ -34,7 +34,7 @@ $ git push origin v0.6.0
 ## Use it:
 ```
 package main
-import("fmt"; "github.com/rodolfoap/bolster")
+import("fmt"; "github.com/rodolfoap/gx")
 
 func main() {
 	fmt.Println(Join("Hello", ",", " ", "World", "!"))
@@ -46,8 +46,8 @@ func main() {
 # echo $GOROOT
 go clean -modcache
 sudo find /usr/local/go -name cache -print -exec rm -r {} \;
-sudo find /usr/local/go -name bolster -print -exec rm -r {} \;
+sudo find /usr/local/go -name gx -print -exec rm -r {} \;
 sudo find /usr/local/go -name rodolfoap -print -exec rm -r {} \;
-sed -i '/require github.com.rodolfoap.bolster/d' go.mod
-go get -u github.com/rodolfoap/bolster@v0.7.0
+sed -i '/require github.com.rodolfoap.gx/d' go.mod
+go get -u github.com/rodolfoap/gx@v0.7.0
 ```

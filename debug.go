@@ -1,4 +1,4 @@
-package bolster
+package gx
 import("fmt"; "log"; "os"; "runtime"; "strconv";)
 
 // BDEBUG=={ 1 | 0 }
@@ -15,7 +15,7 @@ func isDebugMode() bool {
 }
 
 // Produces a trace containing filename, function, line and a message, IF BDEBUG==1
-// "/home/rap/git/bolster/bolster.go main.main() [9] 9 1 3" Adds spaces when neither is a string
+// "/home/rap/git/gx/gx.go main.main() [9] 9 1 3" Adds spaces when neither is a string
 func Trace(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
@@ -25,7 +25,7 @@ func Trace(msgs ...interface{}) {
 }
 
 // Produces a trace containing filename, function, line and a message, IF BDEBUG==1
-// "/home/rap/git/bolster/bolster.go main.main() [9] 9 1 3" Adds spaces when neither is a string
+// "/home/rap/git/gx/gx.go main.main() [9] 9 1 3" Adds spaces when neither is a string
 func Tracef(format string, msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
@@ -36,7 +36,7 @@ func Tracef(format string, msgs ...interface{}) {
 
 // Raises an error message, independently of BDEBUG
 // Produces a trace containing date and time, filename, function, line and a message
-// "2022/11/05 11:16:46 /home/rap/git/bolster/bolster.go main.main() [10] Using log"
+// "2022/11/05 11:16:46 /home/rap/git/gx/gx.go main.main() [10] Using log"
 func Log(msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
@@ -45,7 +45,7 @@ func Log(msgs ...interface{}) {
 
 // Raises an error message, independently of BDEBUG
 // Produces a trace containing date and time, filename, function, line and a message
-// "2022/11/05 11:16:46 /home/rap/git/bolster/bolster.go main.main() [10] Using log"
+// "2022/11/05 11:16:46 /home/rap/git/gx/gx.go main.main() [10] Using log"
 func Logf(format string, msgs ...interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()

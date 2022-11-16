@@ -1,4 +1,4 @@
-package bolster
+package gx
 import("io/ioutil";)
 
 // Load file to string
