@@ -43,9 +43,9 @@ func Test_lib(t *testing.T) {
 
 	Printhr()
 
-	Log("Ternary operator: true: ", iff(1==2, false, true))
-	Log("Ternary operator: 22: ", iff(2==3, 1, 22))
-	Log("Ternary operator: d: ", iff("a"=="b", "c", "d"))
+	Log("Ternary operator: true: ", Iff(1==2, false, true))
+	Log("Ternary operator: 22: ", Iff(2==3, 1, 22))
+	Log("Ternary operator: d: ", Iff("a"=="b", "c", "d"))
 
 	/*** Debug ************************************************************************************************/
 
