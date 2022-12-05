@@ -1,5 +1,5 @@
 package gx
-import("bufio"; "fmt"; "os"; "testing";)
+import("bufio"; "fmt"; "os"; "testing"; "github.com/stretchr/testify/assert";)
 
 var executionLog string
 
@@ -12,7 +12,7 @@ func readerr(scanner *bufio.Scanner, channel string) {
 }
 
 // Entrypoint
-func Test_lib(t *testing.T) {
+func TestGXLib(t *testing.T) {
 	/*** Strings **********************************************************************************************/
 
 	Printhr()
@@ -47,6 +47,15 @@ func Test_lib(t *testing.T) {
 	Log("Ternary operator: 22: ", Iff(2==3, 1, 22))
 	Log("Ternary operator: d: ", Iff("a"=="b", "c", "d"))
 
+	m:=ProgressiveMean{} // Mean base parameters can be predefined if required
+	fmt.Printf("Count: %v; Average: %v\n", m.C, m.Avg)
+
+	for i:=10; i<17; i++ {
+		m.UpdateMean(float64(i)) // type to average must be float64
+		fmt.Printf("New element: %v; Count: %v; Average: %v\n", i, m.C, m.Avg)
+	}
+	assert.Equal(t, m.Avg, 13.0)
+
 	/*** Debug ************************************************************************************************/
 
 	Printhr()
@@ -67,10 +76,21 @@ func Test_lib(t *testing.T) {
 	Error(err)
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [59] ERROR: open I.dont.exist: no such file or directory
 
-	_, err=os.Open("I.dont.exist")
+	// Fatal(err) is tested separately
+}
+
+// TestFatal is used to do tests which are supposed to be fatal
+func TestFatal(t *testing.T) {
+	origLogFatalf:=logFatalf
+	defer func() { logFatalf=origLogFatalf }()
+
+	errors:=[]string{}
+	logFatalf=func(format string, args ...interface{}) {
+		errors=append(errors, format)
+		fmt.Printf("Log.Fatalf() called: %#v\n", errors)
+	}
+	_, err:=os.Open("I.dont.exist")
 	Fatal(err)
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [63] FATAL: open I.dont.exist: no such file or directory
-
-	// Will not run, the FATAL error has exited.
-	Printhr()
+	assert.Greater(t, len(errors), 0)
 }

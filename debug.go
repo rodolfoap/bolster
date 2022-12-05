@@ -1,6 +1,9 @@
 package gx
 import("fmt"; "log"; "os"; "runtime"; "strconv";)
 
+// Default Log.Fatalf()
+var logFatalf=log.Fatalf
+
 // BDEBUG=={ 1 | 0 }
 func isDebugMode() bool {
 	ttable:=[]bool{false, true}
@@ -66,6 +69,6 @@ func Fatal(err interface{}) {
 	pc:=make([]uintptr, 1)
 	frame, _:=runtime.CallersFrames(pc[:runtime.Callers(2, pc)]).Next()
 	if err!=nil {
-		log.Fatalf("%s %s() [%d] FATAL: %v", frame.File, frame.Function, frame.Line, err)
+		logFatalf("%s %s() [%d] FATAL: %v", frame.File, frame.Function, frame.Line, err)
 	}
 }
