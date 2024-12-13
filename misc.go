@@ -7,7 +7,7 @@ func Iff[T interface{}](condition bool, a T, b T) T {
 	return b
 }
 
-// ProgressiveMean: calculate an averge without having the elements count
+// ProgressiveMean: calculate an average without having the elements count
 type ProgressiveMean struct {
 	C   int
 	Avg float64

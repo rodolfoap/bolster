@@ -2,7 +2,7 @@ package gx
 import("fmt"; "log"; "os"; "runtime"; "strconv";)
 
 // Default Log.Fatalf()
-var logFatalf=log.Fatalf
+var logFatalf=log.Fatalf // Fatalf is equivalent to [Printf] followed by a call to [os.Exit]
 
 // BDEBUG=={ 1 | 0 }
 func isDebugMode() bool {

@@ -42,15 +42,15 @@ func TestGXLib(t *testing.T) {
 
 	Printhr()
 
-	Log("Ternary operator: true: ", Iff(1==2, false, true))
+	Log("Ternary operator: true: ", Iff(1==2, false, true)) // debug.go::Log(), misc.go::Iff()
 	Log("Ternary operator: 22: ", Iff(2==3, 1, 22))
 	Log("Ternary operator: d: ", Iff("a"=="b", "c", "d"))
 
-	m:=ProgressiveMean{} // Mean base parameters can be predefined if required
+	m:=ProgressiveMean{} // Mean base parameters can be predefined if required // misc.go::ProgressiveMean{}
 	fmt.Printf("Count: %v; Average: %v\n", m.C, m.Avg)
 
 	for i:=10; i<17; i++ {
-		m.UpdateMean(float64(i)) // type to average must be float64
+		m.UpdateMean(float64(i)) // type to average must be float64 // misc.go::UpdateMean()
 		fmt.Printf("New element: %v; Count: %v; Average: %v\n", i, m.C, m.Avg)
 	}
 	assert.Equal(t, m.Avg, 13.0)
@@ -58,17 +58,17 @@ func TestGXLib(t *testing.T) {
 	/*** Debug ************************************************************************************************/
 
 	Printhr()
-	Trace()
+	Trace() // debug.go::Trace()
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [45]
 	Trace("Monk", " ", "Parker")
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [47] Monk Parker
 	Trace(9, 1, 3)
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [49] 9 1 3
-	Log("Using simple log")
+	Log("Using simple log") // debug.go::Log()
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [51] Using simple log
 	Logf("Formatted log: Type of '1': %T", 1) // Does not need CR/LF because the message is part of a log
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [53] Formatted log: Type of '1': int
-	Tracef("Formatted TRACE: Type of '1': %T", 1) // Does not need CR/LF because the message is part of a log
+	Tracef("Formatted TRACE: Type of '1': %T", 1) // Does not need CR/LF because the message is part of a log // debug.go::Tracef()
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [55] Formatted TRACE: Type of '1': int
 
 	_, err:=os.Open("I.dont.exist")
@@ -80,16 +80,16 @@ func TestGXLib(t *testing.T) {
 
 // TestFatal is used to do tests which are supposed to be fatal
 func TestFatal(t *testing.T) {
-	origLogFatalf:=logFatalf
+	origLogFatalf:=logFatalf // backup original function defined in debug.go
 	defer func() { logFatalf=origLogFatalf }()
 
 	errors:=[]string{}
-	logFatalf=func(format string, args ...interface{}) {
+	logFatalf=func(format string, args ...interface{}) { // Mocking logFatalf
 		errors=append(errors, format)
 		fmt.Printf("Log.Fatalf() called: %#v\n", errors)
 	}
-	_, err:=os.Open("I.dont.exist")
-	Fatal(err)
+	_, err:=os.Open("I.dont.exist") // Fails, produces an error
+	Fatal(err) // will not exit, logFatalf has been mocked, it is called.
 	// 2022/11/06 08:02:26 /home/rap/git/gx/gx_test.go github.com/rodolfoap/gx.Test_lib() [63] FATAL: open I.dont.exist: no such file or directory
 	assert.Greater(t, len(errors), 0)
 }
