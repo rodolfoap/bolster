@@ -15,27 +15,26 @@ func readerr(scanner *bufio.Scanner, channel string) {
 func TestGXLib(t *testing.T) {
 	/*** Strings **********************************************************************************************/
 
-	Printhr()
+	Printhr() // strings.go::Printhr()
 	// "============..."
-	fmt.Println(Join("Hello", ",", " ", "World", "!"))
+	fmt.Println(Join("Hello", ",", " ", "World", "!")) // strings.go::Join()
 	// "Hello, World!"
 
 	/*** IO ***************************************************************************************************/
 
 	Printhr()
 
-	// FileToString(string) string
-	s:=ReadFile("go.mod")
+	s:=ReadFile("go.mod") // io.go::ReadFile()
 	fmt.Println(s)
 
 	/*** EXEC *************************************************************************************************/
 
 	Printhr()
 
-	c:=RunosFactory("./runstatus.py", "10")
+	c:=RunosFactory("./runstatus.py", "10") // exec.go::RunosFactory()
 	go readerr(c.Stdout, "out:")
 	go readerr(c.Stderr, "err:")
-	c.RunosCommand()
+	c.RunosCommand() // exec.go::RunosCommand()
 	fmt.Println("EXITSTATUS:", c.Status)
 	fmt.Println("LOG_LENGTH:", len(executionLog))
 
